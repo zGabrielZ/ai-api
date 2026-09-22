@@ -1,0 +1,15 @@
+spring:
+  ai:
+    deepseek:
+      api-key: ${DEEPSEEK_API_KEY}
+      base-url: ${DEEPSEEK_BASE_URL}
+    openai:
+      api-key: ${OPENAI_API_KEY}
+    ollama:
+      base-url: ${OLLAMA_BASE_URL}
+      chat:
+        model: llama3.1:8b
+
+
+server:
+  port: 8080
