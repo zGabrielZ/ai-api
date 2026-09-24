@@ -2,7 +2,6 @@ package br.com.gabrielferreira.ai.api.controllers;
 
 import br.com.gabrielferreira.ai.api.dtos.input.ChatInputDTO;
 import br.com.gabrielferreira.ai.api.dtos.input.ImageInputDTO;
-import br.com.gabrielferreira.ai.api.dtos.input.WalletInputDTO;
 import br.com.gabrielferreira.ai.api.dtos.output.ChatOutputDTO;
 import br.com.gabrielferreira.ai.api.dtos.output.ImageOutputDTO;
 import br.com.gabrielferreira.ai.api.dtos.output.WalletOutputDTO;
@@ -11,6 +10,7 @@ import br.com.gabrielferreira.ai.domain.enums.Market;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -34,8 +34,10 @@ public class GenerativeAIController {
         return ResponseEntity.ok(ImageOutputDTO.builder().mimeType("image/jpeg").base64("base64encodedimage").build());
     }
 
-    @PostMapping("/wallet")
-    public ResponseEntity<WalletOutputDTO> wallet(@RequestBody @Valid WalletInputDTO walletInputDTO) {
+    // TODO: PROMPT TEMPLATE -> Como está minha carteira hoje 23-09-2026?
+    // Colocar em ptbr e ingles
+    @GetMapping("/wallet")
+    public ResponseEntity<WalletOutputDTO> wallet() {
         return ResponseEntity.ok(WalletOutputDTO.builder()
                 .summary("Sua carteira possui 9 ações, com valor total de R$ 85.420,00. No momento, ITUB4 apresenta a maior alta entre as posições consultadas.")
                 .totalValue(new BigDecimal("85420.00"))
