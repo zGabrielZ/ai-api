@@ -1,4 +1,4 @@
-package br.com.gabrielferreira.ai.api.dtos.request;
+package br.com.gabrielferreira.ai.api.dtos.input;
 
 import jakarta.validation.constraints.NotBlank;
 import lombok.Builder;
@@ -6,8 +6,8 @@ import lombok.Builder;
 import java.io.Serializable;
 
 @Builder
-public record ImageRequest(
+public record WalletInputDTO(
         @NotBlank
-        String prompt
+        String message
 ) implements Serializable {
 }
