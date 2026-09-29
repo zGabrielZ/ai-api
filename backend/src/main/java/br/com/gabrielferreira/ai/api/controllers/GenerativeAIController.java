@@ -2,13 +2,14 @@ package br.com.gabrielferreira.ai.api.controllers;
 
 import br.com.gabrielferreira.ai.api.dtos.input.ChatInputDTO;
 import br.com.gabrielferreira.ai.api.dtos.input.ImageInputDTO;
-import br.com.gabrielferreira.ai.api.dtos.output.ChatOutputDTO;
 import br.com.gabrielferreira.ai.api.dtos.output.ImageOutputDTO;
 import br.com.gabrielferreira.ai.api.dtos.output.WalletOutputDTO;
 import br.com.gabrielferreira.ai.domain.enums.AssetType;
 import br.com.gabrielferreira.ai.domain.enums.Market;
+import br.com.gabrielferreira.ai.domain.services.ChatService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -24,9 +25,12 @@ import java.util.List;
 @RequiredArgsConstructor
 public class GenerativeAIController {
 
-    @PostMapping("/chat")
-    public ResponseEntity<ChatOutputDTO> chat(@RequestBody @Valid ChatInputDTO chatInputDTO) {
-        return ResponseEntity.ok(ChatOutputDTO.builder().response(chatInputDTO.message()).build());
+    private final ChatService chatService;
+
+    @PostMapping(value = "/chat", produces = MediaType.TEXT_PLAIN_VALUE)
+    public ResponseEntity<String> chat(@RequestBody @Valid ChatInputDTO chatInputDTO) {
+        String chat = chatService.chat(chatInputDTO.message());
+        return ResponseEntity.ok(chat);
     }
 
     @PostMapping("/images")

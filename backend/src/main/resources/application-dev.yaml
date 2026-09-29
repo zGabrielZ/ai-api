@@ -3,13 +3,23 @@ spring:
     deepseek:
       api-key: ${DEEPSEEK_API_KEY}
       base-url: ${DEEPSEEK_BASE_URL}
+      chat:
+        model: ${DEEPSEEK_CHAT_MODEL:deepseek-chat}
+        temperature: ${DEEPSEEK_CHAT_TEMPERATURE:0.4}
     openai:
       api-key: ${OPENAI_API_KEY}
+      chat:
+        model: ${OPENAI_CHAT_MODEL:gpt-5.4}
+        temperature: ${OPENAI_CHAT_TEMPERATURE:0.4}
     ollama:
       base-url: ${OLLAMA_BASE_URL}
       chat:
-        model: llama3.1:8b
-
+        model: ${OLLAMA_CHAT_MODEL:llama3.1:8b}
+        temperature: ${OLLAMA_CHAT_TEMPERATURE:0.4}
 
 server:
   port: 8080
+
+ai:
+  chat:
+    provider: ${AI_CHAT_PROVIDER:OPENAI}
