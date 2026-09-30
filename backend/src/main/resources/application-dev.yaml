@@ -23,3 +23,10 @@ server:
 ai:
   chat:
     provider: ${AI_CHAT_PROVIDER:OPENAI}
+
+  image:
+    provider: ${AI_IMAGE_PROVIDER:OPENAI}
+    quality: ${AI_IMAGE_QUALITY:auto}
+    number-of-images: ${AI_IMAGE_NUMBER_OF_IMAGES:1}
+    height: ${AI_IMAGE_HEIGHT:1024}
+    width: ${AI_IMAGE_WIDTH:1024}

@@ -6,7 +6,9 @@ import br.com.gabrielferreira.ai.api.dtos.output.ImageOutputDTO;
 import br.com.gabrielferreira.ai.api.dtos.output.WalletOutputDTO;
 import br.com.gabrielferreira.ai.domain.enums.AssetType;
 import br.com.gabrielferreira.ai.domain.enums.Market;
+import br.com.gabrielferreira.ai.domain.model.ImageDataModel;
 import br.com.gabrielferreira.ai.domain.services.ChatService;
+import br.com.gabrielferreira.ai.domain.services.ImageService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.MediaType;
@@ -27,6 +29,8 @@ public class GenerativeAIController {
 
     private final ChatService chatService;
 
+    private final ImageService imageService;
+
     @PostMapping(value = "/chat", produces = MediaType.TEXT_PLAIN_VALUE)
     public ResponseEntity<String> chat(@RequestBody @Valid ChatInputDTO chatInputDTO) {
         String chat = chatService.chat(chatInputDTO.message());
@@ -35,7 +39,11 @@ public class GenerativeAIController {
 
     @PostMapping("/images")
     public ResponseEntity<ImageOutputDTO> images(@RequestBody @Valid ImageInputDTO imageInputDTO) {
-        return ResponseEntity.ok(ImageOutputDTO.builder().mimeType("image/jpeg").base64("base64encodedimage").build());
+        ImageDataModel imageData = imageService.image(imageInputDTO.prompt());
+        return ResponseEntity.ok(ImageOutputDTO.builder()
+                .mimeType(imageData.mimeType())
+                .base64(imageData.base64())
+                .build());
     }
 
     // TODO: PROMPT TEMPLATE -> Como está minha carteira hoje 23-09-2026?
