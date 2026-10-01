@@ -31,6 +31,7 @@ public class GenerativeAIController {
 
     private final ImageService imageService;
 
+    // TODO: FAZER UMA TOOL CHAMANDO UMA API DE NOTICIAS, CASO A IA NAO SABE, ELA FAZ A BUSCA NESSA API DE NOTICIAS
     @PostMapping(value = "/chat", produces = MediaType.TEXT_PLAIN_VALUE)
     public ResponseEntity<String> chat(@RequestBody @Valid ChatInputDTO chatInputDTO) {
         String chat = chatService.chat(chatInputDTO.message());
