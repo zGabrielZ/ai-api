@@ -1,4 +1,22 @@
 spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5000/wallet-dev?currentSchema=dev
+    username: gabriel
+    password: gabriel
+  jpa:
+    hibernate:
+      ddl-auto: none
+    show-sql: true
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+        format_sql: true
+  flyway:
+    enabled: true
+    locations:
+      - classpath:db/migration
+    schemas: dev
+    baseline-on-migrate: true
   ai:
     deepseek:
       api-key: ${DEEPSEEK_API_KEY}
@@ -30,3 +48,9 @@ ai:
     number-of-images: ${AI_IMAGE_NUMBER_OF_IMAGES:1}
     height: ${AI_IMAGE_HEIGHT:1024}
     width: ${AI_IMAGE_WIDTH:1024}
+
+logging:
+  level:
+    br.com.gabrielferreira.votacao: DEBUG
+    org:
+      flywaydb: INFO
